@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:statemanagment_todo/models/model.dart';
 import 'package:statemanagment_todo/title_widget.dart';
 import 'package:statemanagment_todo/todoList_itemwidget.dart';
 import 'package:statemanagment_todo/toolbar_widget.dart';
+import 'package:uuid/uuid.dart';
 
 class todoApp extends StatelessWidget {
   todoApp({super.key});
   final newToDoController = TextEditingController();
+  final List<todoModel> _allTodos = [
+
+    todoModel(id: Uuid().v4(), description: 'todo 1'),
+    todoModel(id: Uuid().v4(), description: 'todo 2'),
+    todoModel(id: Uuid().v4(), description: 'todo 3'),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +32,9 @@ class todoApp extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           const ToolBarWidget(),
-          const TodoListItemWidget(),
+          for(var i =0; i<_allTodos.length; i++)
+          TodoListItemWidget(item: _allTodos[i]),
+
         ],
       ),
     );
